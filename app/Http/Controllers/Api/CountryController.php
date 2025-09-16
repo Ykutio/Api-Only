@@ -6,10 +6,16 @@ use App\Constants\StatusResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Country\CountryListResource;
 use App\Models\Country\Country;
+use App\Services\Country\DataServices\CountryDataServices;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CountryController extends Controller
 {
+
+    public function __construct(readonly CountryDataServices $countryDataServices)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +32,7 @@ class CountryController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $country = Country::getCountryById($id);
+        $country = $this->countryDataServices->getCountryById($id);
 
         if (empty($country)) {
             return response()->json([

@@ -6,11 +6,15 @@ use App\Constants\StatusResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Category\CategoryListResource;
 use App\Models\Category\Category;
+use App\Services\Category\DataServices\CategoryDataServices;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class CategoryController extends Controller
 {
+    public function __construct(readonly CategoryDataServices $categoryDataServices)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +31,7 @@ class CategoryController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $category = Category::getCategoryById($id);
+        $category = $this->categoryDataServices->getCategoryById($id);
 
         if (empty($category)) {
             return response()->json([

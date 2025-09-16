@@ -6,11 +6,16 @@ use App\Constants\StatusResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Brand\BrandResource;
 use App\Models\Brand\Brand;
+use App\Services\Brand\DataServices\BrandDataServices;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class BrandController extends Controller
 {
+    public function __construct(readonly BrandDataServices $brandDataServices)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +32,7 @@ class BrandController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $brand = Brand::getBrandById($id);
+        $brand = $this->brandDataServices->getBrandById($id);
 
         if (empty($brand)) {
             return response()->json([

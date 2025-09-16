@@ -18,9 +18,4 @@ class Brand extends Model
     {
         return $this->belongsTo(Country::class);
     }
-
-    public static function getBrandById(int $id): ?Brand
-    {
-        return Brand::where('id', $id)->first();
-    }
 }

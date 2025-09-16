@@ -22,7 +22,7 @@ This simple RestApi works that:
     php artisan db:seed
 7.Seventh step:
     url:
-    https://apialone.local/api/{item}/list
+    https://apionly.local/api/{item}/list
         , here 'item' can be:
                 products,
                 brands,
@@ -35,5 +35,5 @@ This simple RestApi works that:
     sort_direction = asc|desc
 You can use uri showing concrete item:
     url:
-    https://apialone.local/api/{item}/{id}/show
+    https://apionly.local/api/{item}/{id}/show
         , here id - is item id in database

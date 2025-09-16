@@ -8,10 +8,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Product\ProductListRequest;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product\Product;
+use App\Services\Product\DataServices\ProductDataServices;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProductController extends Controller
 {
+    public function __construct(readonly ProductDataServices $productDataServices)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,9 +27,9 @@ class ProductController extends Controller
         $sortField = $request->input('sort_field', 'id');
         $sortDirection = $request->input('sort_direction', SortDirection::ASC);
 
-        $productCount = Product::productCount(true);
+        $productCount = $this->productDataServices->productCount(true);
 
-        $data = Product::getProductsList($request->getApiDTO());
+        $data = $this->productDataServices->getActiveProductsListByQuery($request->getApiDTO());
 
         return response()->json([
             'status'         => StatusResponse::SUCCESS,
@@ -42,7 +47,7 @@ class ProductController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $product = Product::getProductById($id);
+        $product = $this->productDataServices->getProductById($id);
         if (empty($product)) {
             return response()->json([
                 'status' => StatusResponse::ERROR,
