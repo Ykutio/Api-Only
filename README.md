@@ -37,3 +37,10 @@ You can use uri showing concrete item:
     url:
     https://apionly.local/api/{item}/{id}/show
         , here id - is item id in database
+
+    IMPORTANT !!!
+ To use this api You must add in to the end of uri this parameter(api_token):
+    ?=api_token=aergFkjh87o8agjrk_jul$kjlkjVl45
+        for example:
+ https://apionly.local/api/products/list?api_token=aergFkjh87o8agjrk_jul$kjlkjVl45
+ https://apionly.local/api/products/2/show?api_token=aergFkjh87o8agjrk_jul$kjlkjVl45
