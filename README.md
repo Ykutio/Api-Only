@@ -35,23 +35,27 @@ This simple RestApi works that:
 7.Seventh step:
 
     url:
+    
     https://apionly.local/api/{item}/list
+    
         , here 'item' can be:
                 products,
                 brands,
                 categories,
                 countries
                 
-,also You can use this uri with some different parameters:
-    per_page (how much 'items' to display on each page) = min:1|max:100
-    offset (which entry in the database to start with) = min:0
-    sort_field (what field in the database is sorted by) = id, name, price, quantity
-    sort_direction = asc|desc
+    ,also You can use this uri with some different parameters:
+        per_page (how much 'items' to display on each page) = min:1|max:100
+        offset (which entry in the database to start with) = min:0
+        sort_field (what field in the database is sorted by) = id, name, price, quantity
+        sort_direction = asc|desc
     
 You can use uri showing concrete item:
 
     url:
+    
     https://apionly.local/api/{item}/{id}/show
+    
         , here id - is item id in database
 
 
@@ -64,4 +68,5 @@ You can use uri showing concrete item:
         for example:
         
  https://apionly.local/api/products/list?api_token=aergFkjh87o8agjrk_jul$kjlkjVl45
+ 
  https://apionly.local/api/products/2/show?api_token=aergFkjh87o8agjrk_jul$kjlkjVl45
