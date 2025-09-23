@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ProductDataServices
 {
-    public static function productCount(bool $isActive = false): int
+    public function productsCountByStatus(bool $isActive = false): int
     {
         $query = Product::query();
 
@@ -20,7 +20,7 @@ class ProductDataServices
         return $query->count();
     }
 
-    public static function getActiveProductsListByQuery(ProductApiDTO $productApiDTO): Collection
+    public function getActiveProductsListByFilter(ProductApiDTO $productApiDTO): Collection
     {
         return Product::query()
             ->limit($productApiDTO->getPerPage())
@@ -30,7 +30,7 @@ class ProductDataServices
             ->get();
     }
 
-    public static function getProductById(int $id): ?Product
+    public function getProductById(int $id): ?Product
     {
         return Product::where('id', $id)->first();
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Constants\ErrorResponse;
 use App\Constants\SortDirection;
 use App\Constants\StatusResponse;
 use App\Http\Controllers\Controller;
@@ -27,9 +28,9 @@ class ProductController extends Controller
         $sortField = $request->input('sort_field', 'id');
         $sortDirection = $request->input('sort_direction', SortDirection::ASC);
 
-        $productCount = $this->productDataServices->productCount(true);
+        $productCount = $this->productDataServices->productsCountByStatus(isActive: true);
 
-        $data = $this->productDataServices->getActiveProductsListByQuery($request->getApiDTO());
+        $data = $this->productDataServices->getActiveProductsListByFilter($request->getApiDTO());
 
         return response()->json([
             'status'         => StatusResponse::SUCCESS,
@@ -51,6 +52,7 @@ class ProductController extends Controller
         if (empty($product)) {
             return response()->json([
                 'status' => StatusResponse::ERROR,
+                'message' => ErrorResponse::WRONG_PARAMS,
             ]);
         }
         $data = new ProductResource($product);

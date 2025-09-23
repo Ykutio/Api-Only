@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Constants\ErrorResponse;
 use App\Constants\StatusResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Brand\BrandResource;
-use App\Models\Brand\Brand;
 use App\Services\Brand\DataServices\BrandDataServices;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -21,9 +21,11 @@ class BrandController extends Controller
      */
     public function index(): JsonResponse
     {
+        $brands = $this->brandDataServices->getAllBrands();
+
         return response()->json([
             'status' => StatusResponse::SUCCESS,
-            'data'   => BrandResource::collection(Brand::all()),
+            'data' => BrandResource::collection($brands),
         ]);
     }
 
@@ -37,6 +39,7 @@ class BrandController extends Controller
         if (empty($brand)) {
             return response()->json([
                 'status' => StatusResponse::ERROR,
+                'message' => ErrorResponse::WRONG_PARAMS,
             ]);
         }
 

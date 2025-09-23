@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Constants\ErrorResponse;
 use App\Constants\StatusResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Country\CountryListResource;
-use App\Models\Country\Country;
 use App\Services\Country\DataServices\CountryDataServices;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -21,9 +21,11 @@ class CountryController extends Controller
      */
     public function index(): JsonResponse
     {
+        $countries = $this->countryDataServices->getAllCountries();
+
         return response()->json([
             'status' => StatusResponse::SUCCESS,
-            'data'   => CountryListResource::collection(Country::all()),
+            'data' => CountryListResource::collection($countries),
         ]);
     }
 
@@ -37,6 +39,7 @@ class CountryController extends Controller
         if (empty($country)) {
             return response()->json([
                 'status' => StatusResponse::ERROR,
+                'message' => ErrorResponse::WRONG_PARAMS,
             ]);
         }
 

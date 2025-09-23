@@ -19,17 +19,17 @@ class ProductResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'          => $this->id,
-            'name'        => $this->name,
-            'description' => $this->description,
-            'img'         => $this->img,
-            'price'       => $this->price,
-            'brand'       => BrandListResource::make($this->brand),
-            'category'    => CategoryListResource::make($this->category),
-            'country'     => CountryListResource::make($this->country),
-            'quantity'    => $this->quantity,
-            'status'      => $this->status,
-            'created_at'  => $this->created_at->format(DataFormat::DATA_FORMAT),
+            'id'          => $this->resource['id'],
+            'name'        => $this->resource['name'],
+            'description' => $this->resource['description'],
+            'img'         => $this->resource['img'],
+            'price'       => $this->resource['price'],
+            'brand'       => BrandListResource::make($this->resource['brand']),
+            'category'    => CategoryListResource::make($this->resource['category']),
+            'country'     => CountryListResource::make($this->resource['country']),
+            'quantity'    => $this->resource['quantity'],
+            'status'      => $this->resource['status'],
+            'created_at'  => $this->resource['created_at']->format(DataFormat::DATA_FORMAT),
         ];
     }
 }

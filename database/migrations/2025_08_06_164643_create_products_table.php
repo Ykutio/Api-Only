@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table): void {
             $table->id();
             $table->string('name', 50);
             $table->string('description', 250)->nullable()->default(null);
             $table->string('img')->nullable()->default(null);
-            $table->integer('price')->unsigned()->default(null);
+            $table->decimal('price', 6, 2)->unsigned()->default(0.00);
             $table->integer('brand_id')->unsigned()->nullable()->default(null);
             $table->integer('category_id')->unsigned()->nullable()->default(null);
             $table->integer('country_id')->unsigned()->nullable()->default(null);

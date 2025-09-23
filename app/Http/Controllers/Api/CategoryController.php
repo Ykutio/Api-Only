@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Constants\ErrorResponse;
 use App\Constants\StatusResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Category\CategoryListResource;
-use App\Models\Category\Category;
 use App\Services\Category\DataServices\CategoryDataServices;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -20,9 +20,11 @@ class CategoryController extends Controller
      */
     public function index(): JsonResponse
     {
+        $categories = $this->categoryDataServices->getAllCategories();
+
         return response()->json([
             'status' => StatusResponse::SUCCESS,
-            'data'   => CategoryListResource::collection(Category::all()),
+            'data' => CategoryListResource::collection($categories),
         ]);
     }
 
@@ -36,6 +38,7 @@ class CategoryController extends Controller
         if (empty($category)) {
             return response()->json([
                 'status' => StatusResponse::ERROR,
+                'message' => ErrorResponse::WRONG_PARAMS,
             ]);
         }
 

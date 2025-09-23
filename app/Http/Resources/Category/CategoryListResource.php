@@ -16,10 +16,10 @@ class CategoryListResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'         => $this->id,
-            'name'       => $this->name,
-            'status'     => $this->status,
-            'created_at' => $this->created_at->format(DataFormat::DATA_FORMAT),
+            'id'         => $this->resource['id'],
+            'name'       => $this->resource['name'],
+            'status'     => $this->resource['status'],
+            'created_at' => $this->resource['created_at']->format(DataFormat::DATA_FORMAT),
         ];
     }
 }
