@@ -27,7 +27,7 @@ This simple RestApi works that:
         DB_USERNAME=root
         DB_PASSWORD=
 
-        API_TOKEN=
+        API_TOKEN=aergFkjh87o8agjrk_jul$kjlkjVl45
         
 6.Sixth step:
 
