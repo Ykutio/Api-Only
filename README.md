@@ -21,11 +21,13 @@ This simple RestApi works that:
     add params to ".env"
     
         DB_CONNECTION=mysql
-        DB_HOST='MySQL-8.2'
+        DB_HOST=127.0.0.1
         DB_PORT=3306
-        DB_DATABASE=apionly
+        DB_DATABASE=laravel
         DB_USERNAME=root
-        DB_PASSWORD= 
+        DB_PASSWORD=
+
+        API_TOKEN=
         
 6.Sixth step:
 
